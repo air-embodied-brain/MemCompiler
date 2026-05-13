@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MemCompiler: State-Conditioned Memory for Embodied Agents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+    <h1>MemCompiler: <span class="clr-compile">Compile</span>, Don't <span class="clr-inject">Inject</span> — State-Conditioned Memory for Embodied Agents</h1>
+    <p class="authors">
+        Xin Ding<sup>1</sup><sup class="equal">*</sup>,
+        Xinrui Wang<sup>2</sup><sup class="equal">*</sup>,
+        Yifan Yang<sup>3</sup>,
+        Hao Wu<sup>4</sup>,
+        Shiqi Jiang<sup>3</sup>,
+        Qianxi Zhang<sup>3</sup>,
+        Liang Mi<sup>4</sup>,
+        Hanxin Zhu<sup>1</sup>,
+        Kun Li<sup>5</sup>,
+        Yunxin Liu<sup>5</sup>,
+        Zhibo Chen<sup>1</sup><sup class="dagger">&dagger;</sup>,
+        Ting Cao<sup>5</sup><sup class="dagger">&dagger;</sup>
+    </p>
+    <p class="affiliations">
+        <sup>1</sup>University of Science and Technology of China &nbsp;&nbsp;
+        <sup>2</sup>Huazhong University of Science and Technology<br>
+        <sup>3</sup>Microsoft Research &nbsp;&nbsp;
+        <sup>4</sup>Nanjing University &nbsp;&nbsp;
+        <sup>5</sup>Institute for AI Industry Research (AIR), Tsinghua University
+    </p>
+    <p class="author-notes">
+        <sup>*</sup> Equal contribution &nbsp;&nbsp; <sup>&dagger;</sup> Corresponding author
+    </p>
+    <div class="buttons">
+        <a class="btn" href="#" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 9h4v2h-4v-2zm0 4h4v2h-4v-2zm-2-4h1v2H8v-2zm0 4h1v2H8v-2z"/></svg>
+            Paper
+        </a>
+        <a class="btn" href="#" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>
+            Code
+        </a>
+        <a class="btn" href="#" target="_blank">
+            &#129303; Model
+        </a>
+    </div>
+</section>
+
+<!-- Abstract -->
+<section class="abstract-section">
+    <div class="container">
+        <h2>Abstract</h2>
+        <p>
+            Existing memory systems for embodied agents typically inject retrieved memory as static context at episode start, a paradigm we term <em>Ahead-of-time Monolithic Memory Injection (AMMI)</em>. However, this static design quickly becomes misaligned with the agent's evolving state and may degrade lightweight executors below the no-memory baseline. To address this, we propose <strong>MemCompiler</strong>, which reframes memory utilization as <em>State-Conditioned Memory Compilation</em>. A learned Memory Compiler reads a structured <em>Brief State</em> capturing the agent's current execution state and dynamically selects and compiles only relevant memory into executable guidance. This guidance is delivered through a text channel and a latent <em>Soft-Mem</em> channel that preserves perceptual information not expressible in text. Across AlfWorld, EmbodiedBench, and ScienceWorld, MemCompiler consistently improves over no-memory across open-source backbones (up to +129%), matches or approaches frontier closed-source systems, and reduces per-step latency by ~60%, demonstrating that state-aware memory compilation improves both effectiveness and efficiency.
+        </p>
+    </div>
+</section>
+
+<!-- Method -->
+<section class="method-section">
+    <h2>Method</h2>
+    <div class="method-cards">
+        <div class="method-card">
+            <img src="assets/method_1.png" alt="MemCompiler method overview">
+            <p class="caption">
+                <strong>Figure 1:</strong> Two paradigms for memory utilization in embodied agents. (a) AMMI injects the full task memory M at episode start directly, the Executor must attend over all of M, burying valuable experience under irrelevant entries. (b) SCMC (Ours) retains M as a source library and compiles only state-relevant content m<sup>*,t</sup> at each step, ensuring the Executor receives precisely what it needs. The colored bars denote Qwen, GPT-5.2, Gemini-3-Flash, and our method, respectively, with performance measured across benchmarks.
+            </p>
+        </div>
+        <div class="method-card">
+            <img src="assets/method_2.png" alt="MemCompiler architecture details">
+            <p class="caption">
+                <strong>Figure 2:</strong> Overview of MemCompiler at step t. The Memory Compiler reads runtime state s<sub>t</sub> = (o<sub>t</sub>, b<sub>t</sub>) and task memory M (retrieved once at episode start), then delivers the compiled result m<sup>*,t</sup> to the Executor through two parallel channels: a text channel (m<sup>*,t</sup><sub>text</sub>) and a latent soft channel (m<sup>*,t</sup><sub>soft</sub>), which are fused at the Executor's embedding level. Brief State b<sub>t</sub> is dynamically maintained via structured operations and fed back as part of the next step's state. Note, at each step the Memory Compiler decides among four output types (Section 3.2): EXPERIENCE (m<sup>*,t</sup> only), BRIEF (&Delta;b<sub>t</sub> only), HYBRID (both jointly), or NOACTION (neither, when no entry in M is currently applicable).
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Experiments -->
+<section class="experiment-section">
+    <div class="container">
+        <h2>Experiments</h2>
+
+        <!-- EmbodiedBench Results -->
+        <div class="experiment-block">
+            <h3>EmbodiedBench Results</h3>
+            <div class="experiment-charts">
+                <img src="assets/embodiedbench_results.png" alt="EmbodiedBench Results">
+            </div>
+        </div>
+
+        <!-- ALFWorld & ScienceWorld Results -->
+        <div class="experiment-block">
+            <h3>ALFWorld &amp; ScienceWorld Results</h3>
+            <div class="experiment-charts">
+                <img src="assets/alfworld_scienceworld_results.png" alt="ALFWorld & ScienceWorld Results" style="max-width: 350px;">
+            </div>
+        </div>
+
+        <!-- Attention Analysis -->
+        <div class="experiment-block">
+            <h3>Attention Analysis</h3>
+            <p>
+                Mean pre-softmax attention logit (higher values mean more attention weight) of the Executor over memory tokens across AlfWorld episodes (steps 0&ndash;29). AMMI (blue) exhibits monotonic decay, reflecting increasing misalignment between static memory and the agent's evolving state. In contrast, SCMC (orange) maintains stable high attention throughout, indicating consistent alignment between memory and the Executor's current needs.
+            </p>
+            <div class="experiment-charts">
+                <img src="assets/atten.png" alt="Attention Analysis">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Citation -->
+<section class="citation-section">
+    <h2>Citation</h2>
+    <div class="citation-block">
+        <button class="copy-btn" onclick="copyBib(this)">Copy</button>
+@misc{ding2026memcompiler,
+    title={MemCompiler: Compile, Don't Inject -- State-Conditioned Memory for Embodied Agents},
+    author={Xin Ding and Xinrui Wang and Yifan Yang and Hao Wu and Shiqi Jiang and Qianxi Zhang and Liang Mi and Hanxin Zhu and Kun Li and Yunxin Liu and Zhibo Chen and Ting Cao},
+    year={2026},
+    eprint={XXXX.XXXXX},
+    archivePrefix={arXiv},
+    primaryClass={cs.AI},
+    url={https://arxiv.org/abs/XXXX.XXXXX},
+}</div>
+</section>
+
+<footer>
+    <p>&copy; 2026 MemCompiler Authors</p>
+</footer>
+
+<script>
+function copyBib(btn) {
+    const text = btn.parentElement.textContent.replace('Copy', '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 1500);
+    });
+}
+</script>
+
+</body>
+</html>

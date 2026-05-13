@@ -1,0 +1,308 @@
+/* ── Semantic colours ── */
+.clr-compile {
+    color: #D97706;
+}
+
+.clr-inject {
+    color: #2563EB;
+}
+
+/* ── Base ── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: #111;
+    background: #fff;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+section {
+    padding: 72px 24px;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+}
+
+/* ── Hero ── */
+.hero {
+    padding: 120px 24px 80px;
+    text-align: center;
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    max-width: 860px;
+    margin: 0 auto 16px;
+}
+
+.hero .authors {
+    font-size: 1.05rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.hero .authors sup {
+    font-size: 0.7em;
+    margin: 0 1px;
+}
+
+.hero .authors sup.equal {
+    color: #D97706;
+}
+
+.hero .authors sup.dagger {
+    color: #2563EB;
+}
+
+.hero .affiliations {
+    font-size: 0.9rem;
+    color: #888;
+    line-height: 1.9;
+    max-width: 720px;
+    margin: 0 auto 8px;
+}
+
+.hero .author-notes {
+    font-size: 0.82rem;
+    color: #999;
+    margin-bottom: 32px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border: 1.5px solid #111;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn:hover {
+    background: #111;
+    color: #fff;
+}
+
+.btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+/* ── Abstract ── */
+.abstract-section {
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.abstract-section .container p {
+    font-size: 1.02rem;
+    color: #333;
+    text-align: justify;
+    line-height: 1.85;
+}
+
+/* ── Method ── */
+.method-section {
+    background: #fafafa;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.method-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.method-card {
+    text-align: center;
+}
+
+.method-card img {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 16px;
+}
+
+.method-card .caption {
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* ── Experiments ── */
+.experiment-section {
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.experiment-section .container {
+    max-width: 960px;
+}
+
+.experiment-block {
+    margin-bottom: 56px;
+}
+
+.experiment-block:last-child {
+    margin-bottom: 0;
+}
+
+.experiment-block h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+
+.experiment-block p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.7;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 24px;
+}
+
+.experiment-charts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+}
+
+.experiment-charts img {
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+
+.experiment-charts-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.experiment-charts-row img {
+    width: 48%;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+
+/* ── Citation ── */
+.citation-section {
+    background: #fafafa;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.citation-block {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 20px 24px;
+    font-family: "SFMono-Regular", "Consolas", "Liberation Mono", monospace;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: #444;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+    position: relative;
+}
+
+.citation-block .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    color: #666;
+    transition: background 0.2s;
+}
+
+.citation-block .copy-btn:hover {
+    background: #e5e5e5;
+}
+
+/* ── Footer ── */
+footer {
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #aaa;
+    background: #fff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero .authors {
+        font-size: 0.92rem;
+    }
+
+    section {
+        padding: 48px 16px;
+    }
+
+    .experiment-charts-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .experiment-charts-row img {
+        width: 100%;
+    }
+}
