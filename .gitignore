@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.db
+*.db-journal
+*.lock
+*.log
+output*/
+.db*/
+chroma.log
+*.zip
+.idea/
+.vscode/
+*.egg-info/
+dist/
+build/
