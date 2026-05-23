@@ -8,7 +8,7 @@ from ..common import (
     MASMessage,
     StorageNameSpace
 )
-from mas.llm import LLMCallable
+from core.llm import LLMCallable
 
 @dataclass
 class MASMemoryBase(StorageNameSpace, ABC):

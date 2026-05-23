@@ -677,7 +677,7 @@ Your output:
 def apply_scienceworld_insights_prompts():
     """Monkey-patch MemcompilerPrompts with ScienceWorld-specific prompts.
     Call this BEFORE Memcompiler initialization."""
-    from mas.memory.mas_memory.prompt import MemcompilerPrompts
+    from core.memory.core_memory.prompt import MemcompilerPrompts
     MemcompilerPrompts.detect_mistakes_system_prompt = SW_DETECT_MISTAKES_SYSTEM_PROMPT
     MemcompilerPrompts.detect_mistakes_user_prompt = SW_DETECT_MISTAKES_USER_PROMPT
     MemcompilerPrompts.critique_compare_rules_system_prompt = SW_CRITIQUE_COMPARE_RULES_SYSTEM_PROMPT

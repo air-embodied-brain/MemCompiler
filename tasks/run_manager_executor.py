@@ -215,9 +215,9 @@ class FileLock:
 def create_safe_memcompiler_class():
     """Create SafeMemcompiler class after imports are set up. Only used when UPDATE_MEMORY=True."""
     import pickle
-    from mas.memory.mas_memory import Memcompiler
-    from mas.memory.mas_memory.memcompiler import TaskLayer, InsightsManager
-    from mas.utils import write_json
+    from core.memory.core_memory import Memcompiler
+    from core.memory.core_memory.memcompiler import TaskLayer, InsightsManager
+    from core.utils import write_json
 
     class SafeTaskLayer(TaskLayer):
         """TaskLayer with file locking for pickle operations and safe retrieval."""
@@ -355,7 +355,7 @@ def create_safe_memcompiler_class():
         def add_memory(self, mas_message) -> None:
             """Add memory with locked insights update."""
             from langchain.docstore.document import Document
-            from mas.memory.common import MASMessage
+            from core.memory.common import MASMessage
 
             # Sparsification
             mas_message = self._extract_mas_message(mas_message=mas_message)
@@ -580,8 +580,8 @@ def generate_runtime_key_steps(success_task: Any, llm_model: Any) -> Optional[st
     if not task_text or not task_trajectory:
         return None
 
-    from mas.llm import Message
-    from mas.memory.mas_memory.prompt import MemcompilerPrompts
+    from core.llm import Message
+    from core.memory.core_memory.prompt import MemcompilerPrompts
 
     clean_traj = re.sub(r'\d+', '', str(task_trajectory))
     prompt = MemcompilerPrompts.extract_true_traj_user_prompt.format(
@@ -1491,9 +1491,9 @@ def worker_process(
         f"[Process {process_id}] Loading Memcompiler from: {resolved_memcompiler_path} "
         f"(configured={MEMCOMPILER_PATH}, UPDATE_MEMORY={UPDATE_MEMORY})"
     )
-    from mas.memory.mas_memory.memcompiler import Memcompiler
-    from mas.utils import EmbeddingFunc
-    from mas.memory.common import MASMessage
+    from core.memory.core_memory.memcompiler import Memcompiler
+    from core.utils import EmbeddingFunc
+    from core.memory.common import MASMessage
 
     # Create llm_model wrapper based on MANAGER_MODEL
     if MANAGER_MODEL == "qwen":

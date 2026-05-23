@@ -206,9 +206,9 @@ def resolve_memcompiler_path(configured_path: str, allow_fallback: bool = True) 
 def create_safe_memcompiler_class():
     """Create SafeMemcompiler class after imports are set up. Only used when UPDATE_MEMORY=True."""
     import pickle
-    from mas.memory.mas_memory import Memcompiler
-    from mas.memory.mas_memory.memcompiler import TaskLayer, InsightsManager
-    from mas.utils import write_json
+    from core.memory.core_memory import Memcompiler
+    from core.memory.core_memory.memcompiler import TaskLayer, InsightsManager
+    from core.utils import write_json
 
     class SafeTaskLayer(TaskLayer):
         def __init__(self, *args, **kwargs):
@@ -304,7 +304,7 @@ def create_safe_memcompiler_class():
 
         def add_memory(self, mas_message) -> None:
             from langchain.docstore.document import Document
-            from mas.memory.common import MASMessage
+            from core.memory.common import MASMessage
 
             mas_message = self._extract_mas_message(mas_message=mas_message)
             self.task_layer.add_task_node(mas_message.task_main)
@@ -955,9 +955,9 @@ def worker_process(
     # Setup Memcompiler
     resolved_memcompiler_path = resolve_memcompiler_path(MEMCOMPILER_PATH, allow_fallback=not UPDATE_MEMORY)
     print(f"[Process {process_id}] Loading Memcompiler from: {resolved_memcompiler_path}")
-    from mas.memory.mas_memory.memcompiler import Memcompiler
-    from mas.utils import EmbeddingFunc
-    from mas.memory.common import MASMessage
+    from core.memory.core_memory.memcompiler import Memcompiler
+    from core.utils import EmbeddingFunc
+    from core.memory.common import MASMessage
 
     if MANAGER_MODEL == "qwen":
         llm_model = QwenLLMWrapper(model=manager_model, tokenizer=manager_tokenizer)

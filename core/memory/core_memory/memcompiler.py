@@ -18,8 +18,8 @@ from .memory_base import MASMemoryBase
 from ..common import MASMessage, StateChain
 from ..utils import cosine_similarity
 from .prompt import MemcompilerPrompts
-from mas.utils import load_json, write_json, random_divide_list
-from mas.llm import LLMCallable, Message
+from core.utils import load_json, write_json, random_divide_list
+from core.llm import LLMCallable, Message
 
 @dataclass
 class Memcompiler(MASMemoryBase):
